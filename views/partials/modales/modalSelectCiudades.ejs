@@ -1,0 +1,22 @@
+<div class="modal fade" id="selectCiudadModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar Ciudad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="searchCiudad" class="form-control mb-3" placeholder="Buscar ciudad...">
+          <div id="ciudadesList" class="list-group">
+            <!-- Lista de ciudades -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="openAddCiudadModal()">
+            <i class="bi bi-plus"></i> Nueva Ciudad
+          </button>
+        </div>
+      </div>
+    </div>
+</div>

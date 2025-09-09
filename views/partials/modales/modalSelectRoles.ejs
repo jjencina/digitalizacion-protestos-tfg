@@ -1,0 +1,22 @@
+<div class="modal fade" id="rolModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar Rol</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="searchRol" class="form-control mb-3" placeholder="Buscar rol...">
+          <div id="rolesList" class="list-group">
+            <!-- Lista de roles -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="openAddRolModal()">
+            <i class="bi bi-plus"></i> Nuevo Rol
+          </button>
+        </div>
+      </div>
+    </div>
+</div>

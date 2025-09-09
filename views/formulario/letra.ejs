@@ -1,0 +1,262 @@
+<!-- NO SE USA pero le eche demasiado tiempo como para quitaro-->
+<div class="card-body" id="letrasContainer">
+    <div class="letra-template">
+      <div id="letra_<%= letraIndex %>" class="letra-section mb-4" data-index="<%= letraIndex %>">
+        <div class="d-flex justify-content-between mb-3">
+            <h6>Letra de Cambio #<%= letraIndex + 1 %></h6>
+            <button type="button" class="btn btn-outline-danger btn-sm" onclick="deleteLetra(<%= letraIndex %>)">
+                <i class="bi bi-trash"></i>
+            </button>
+        </div>
+
+        <!-- Info basica - Primera fila -->
+        <div class="row g-3">
+            <!-- Ciudad Letra -->
+            <div class="col-md-3">
+                <label class="form-label">Ciudad Letra</label>
+                <div class="ciudad-search-group">
+                    <input type="text" class="form-control ciudad-search" data-for="ciudad_letra_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][ciudad_id]">
+                    <div class="ciudad-suggestions"></div>
+                </div>
+            </div>
+
+            <!-- Fecha de emisión -->
+            <div class="col-md-3">
+                <label class="form-label">Fecha de emisión</label>
+                <input type="date" class="form-control" name="letras[<%= letraIndex %>][fecha_emision]">
+            </div>
+
+            <!-- Importe -->
+            <div class="col-md-3">
+                <label class="form-label">Importe</label>
+                <div class="input-group">
+                    <input type="number" class="form-control" step="0.01" name="letras[<%= letraIndex %>][importe]">
+                </div>
+            </div>
+
+            <!-- Curso o tipo de cambio -->
+            <div class="col-md-3">
+                <label class="form-label">Curso o tipo de cambio</label>
+                <div class="moneda-search-group flex-grow-1">
+                <input type="text" class="form-control moneda-search" data-for="letra_<%= letraIndex %>" placeholder="Moneda..." autocomplete="off">
+                <input type="hidden" name="letras[<%= letraIndex %>][moneda_id]">
+                <div class="moneda-suggestions"></div>
+            </div>
+                        </div>        
+        </div>
+
+        <!-- Segunda fila -->
+        <div class="row g-3 mt-2">
+
+            <!-- Vencimiento -->
+            <div class="col-md-3">
+                <label class="form-label">Vencimiento</label>
+                <input type="text" class="form-control" name="letras[<%= letraIndex %>][fecha_vencimiento]">
+            </div>
+
+            <!-- Tipo de Letra -->
+            <div class="col-md-3">
+                <label class="form-label">Tipo de Letra</label> 
+                <div class="tipo-letra-search-group">
+                    <input type="text" class="form-control tipo-letra-search" data-for="letra_<%= letraIndex %>" placeholder="Tipo de letra..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][tipo_letra_id]">
+                    <div class="tipo-letra-suggestions"></div>
+                </div>
+            </div>
+
+
+
+            <!-- Ordenante -->
+            <div class="col-md-3">
+            <label class="form-label">Ordenante</label>
+            <div class="persona-search-group">
+                <input type="text" class="form-control persona-search" data-for="ordenante_<%= letraIndex %>" placeholder="Nombre..." autocomplete="off">
+                <input type="hidden" name="letras[<%= letraIndex %>][ordenante_persona_id]">
+                <div class="persona-suggestions"></div>
+            </div>
+            <div class="input-group mt-2">
+                <div class="ciudad-search-group w-100">
+                    <input type="text" class="form-control ciudad-search" data-for="ordenante_ciudad_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][ordenante_ciudad_id]">
+                    <div class="ciudad-suggestions"></div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Valor -->
+            <div class="col-md-3">
+                <label class="form-label">Valor</label>
+                <div class="tipo-valor-search-group">
+                    <input type="text" class="form-control tipo-valor-search" data-for="valor_<%= letraIndex %>" placeholder="Tipo de valor..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][tipo_valor_id]">
+                    <div class="tipo-valor-suggestions"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tercera fila - Roles principales -->
+        <div class="row g-3 mt-2">
+            <!-- Librador -->
+            <div class="col-md-3">
+                <label class="form-label">Librador</label>
+                <div class="persona-search-group">
+                    <input type="text" class="form-control persona-search" data-for="librador_<%= letraIndex %>" placeholder="Nombre..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][librador_persona_id]">
+                    <div class="persona-suggestions"></div>
+                </div>
+                <div class="input-group mt-2">
+                    <div class="ciudad-search-group w-100">
+                        <input type="text" class="form-control ciudad-search" data-for="librador_ciudad_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                        <input type="hidden" name="letras[<%= letraIndex %>][librador_ciudad_id]">
+                        <div class="ciudad-suggestions"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Librado -->
+            <div class="col-md-3">
+                <label class="form-label">Librado</label>
+                <div class="persona-search-group">
+                    <input type="text" class="form-control persona-search" data-for="librado_<%= letraIndex %>" placeholder="Nombre..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][librado_persona_id]">
+                    <div class="persona-suggestions"></div>
+                </div>
+                <div class="input-group mt-2">
+                    <div class="ciudad-search-group w-100">
+                        <input type="text" class="form-control ciudad-search" data-for="librado_ciudad_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                        <input type="hidden" name="letras[<%= letraIndex %>][librado_ciudad_id]">
+                        <div class="ciudad-suggestions"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cuarta fila - Pagadera y Domiciliado -->
+            <div class="col-md-3">
+                <label class="form-label">Pagadera</label>
+                <div class="ciudad-search-group">
+                    <input type="text" class="form-control ciudad-search" data-for="pagadera_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][pagadera_ciudad_id]">
+                    <div class="ciudad-suggestions"></div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+            <div class="input-group mt-2">
+                <label class="form-label w-100">Domiciliado</label>
+                <div class="persona-search-group w-100">
+                    <input type="text" class="form-control persona-search" data-for="domiciliado_<%= letraIndex %>" placeholder="Nombre..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][domiciliado_persona_id]">
+                    <div class="persona-suggestions"></div>
+                </div>
+                <div class="ciudad-search-group w-100 mt-2">
+                    <input type="text" class="form-control ciudad-search" data-for="domiciliado_ciudad_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                    <input type="hidden" name="letras[<%= letraIndex %>][domiciliado_ciudad_id]">
+                    <div class="ciudad-suggestions"></div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="row g-3 mt-2">
+        
+
+        </div>
+
+        <!-- Botones de seleccionar -->
+        <div class="mt-3">
+            <!-- Indicación -->
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" 
+                        onchange="toggleSectionVisibility(this, 'indicacion_<%= letraIndex %>')"
+                        id="checkIndicacion_<%= letraIndex %>">
+                <label class="form-check-label">Añadir Indicación</label>
+            </div>
+        
+            <div id="indicacion_<%= letraIndex %>" class="mt-2" style="display: none;">
+                <div class="mb-3">
+                    <label class="form-label">Detalles de la Indicación</label>
+                    <textarea class="form-control mb-2" rows="3" name="letras[<%= letraIndex %>][detalles_indicacion]"></textarea>
+                </div>
+                
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Indicado / domiciliado</label>
+                        <div class="persona-search-group">
+                            <input type="text" 
+                                    class="form-control persona-search" 
+                                    data-for="indicado_<%= letraIndex %>"
+                                    placeholder="Nombre..."
+                                    autocomplete="off">
+                            <input type="hidden" name="letras[<%= letraIndex %>][indicado_persona_id]">
+                            <div class="persona-suggestions"></div>
+                        </div>
+                        <div class="input-group mt-2">
+                            <div class="ciudad-search-group w-100">
+                            <input type="text" class="form-control ciudad-search" data-for="indicado_ciudad_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                            <input type="hidden" name="letras[<%= letraIndex %>][indicado_ciudad_id]">
+                            <div class="ciudad-suggestions"></div>
+                            </div>
+                        </div>
+                    </div>       
+                </div>
+            </div>
+        </div>
+
+        <!-- Aceptación -->
+        <div class="mt-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" 
+                        onchange="toggleSectionVisibility(this, 'aceptacion_<%= letraIndex %>')"
+                        id="checkAceptacion_<%= letraIndex %>">
+                <label class="form-check-label">Añadir Aceptación</label>
+            </div>
+            <div id="aceptacion_<%= letraIndex %>" class="mt-2" style="display: none;">
+                <div class="row g-3">
+                    <!-- Aceptante -->
+                    <div class="col-md-6">
+                        <label class="form-label">Aceptante</label>
+                        <div class="persona-search-group">
+                            <input type="text" 
+                                    class="form-control persona-search" 
+                                    data-for="aceptante_<%= letraIndex %>"
+                                    placeholder="Nombre..."
+                                    autocomplete="off">
+                            <input type="hidden" name="letras[<%= letraIndex %>][aceptante_persona_id]">
+                            <div class="persona-suggestions"></div>
+                        </div>
+                        <div class="input-group mt-2">
+                            <div class="ciudad-search-group w-100">
+                                <input type="text" class="form-control ciudad-search" data-for="aceptante_ciudad_<%= letraIndex %>" placeholder="Ciudad..." autocomplete="off">
+                                <input type="hidden" name="letras[<%= letraIndex %>][aceptante_ciudad_id]">
+                                <div class="ciudad-suggestions"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Añadir mas campos -->
+        <div class="mt-3">
+            <a href="#" class="text-primary add-campos-link" data-bs-toggle="modal" data-bs-target="#addCamposModal" data-section="letra" data-letra-index="<%= letraIndex %>">
+            <i class="bi bi-plus-circle"></i> Añadir más campos
+            </a>
+        </div>
+        
+      </div>
+  
+      <!-- Contenedor de Endosos y botón -->
+      <div class="mt-3">
+          <h6>Endosos</h6>
+          <div id="endososContainer_<%= letraIndex %>" class="endosos-container">
+          <!-- Aquí se añaden los endosos -->
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm mt-2" 
+                  onclick="addEndoso(<%= letraIndex %>)">
+          <i class="bi bi-plus"></i> Añadir Endoso
+          </button>
+      </div>
+    </div>
+</div>
+

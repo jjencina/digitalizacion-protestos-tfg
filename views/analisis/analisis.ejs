@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Análisis de Datos - Sistema de Gestión de Protestos</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <link href="/stylesheets/analisis.css" rel="stylesheet">
+</head>
+<body>
+    <%- include('../partials/header') %>
+
+  <div class="container-fluid">
+    <div class="row mb-3">
+      <div class="col-12">
+        <h1 class="mt-4 mb-4">Panel de Análisis de Datos</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Panel de filtros (col izquierda) -->
+      <div class="col-md-3">
+        <div class="card shadow-sm mb-4">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0"><i class="bi bi-funnel"></i> Filtros</h5>
+          </div>
+          <div class="card-body">
+            <form id="filterForm">
+              <div class="mb-3">
+                <label for="entitySelect" class="form-label">Entidad a analizar:</label>
+                <select class="form-select" id="entitySelect">
+                  <option value="todos" selected>Todos</option>
+                  <option value="protestos">Protestos</option>
+                  <option value="letras">Letras de Cambio</option>
+                  <option value="endosos">Endosos</option>
+                  <option value="personas">Personas</option>
+                  <option value="ciudades">Ciudades</option>
+                </select>
+              </div>
+              
+              <div id="dynamicFilters">
+                <!-- Los filtros -->
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna principal (derecha) -->
+      <div class="col-md-9">
+        <!-- Navbar de visualizaciones -->
+        <div class="card shadow-sm mb-4">
+          <div class="visualization-tabs">
+            <ul class="nav nav-pills justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="timeline">
+                  <i class="bi bi-calendar-week"></i> Línea de Tiempo
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="monedas">
+                  <i class="bi bi-pie-chart"></i> Monedas
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="ciudades">
+                  <i class="bi bi-geo-alt"></i> Ciudades
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="mapamundi">
+                  <i class="bi bi-globe"></i> Mapamundi
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="importes">
+                  <i class="bi bi-bar-chart"></i> Importes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="network">
+                  <i class="bi bi-diagram-3"></i> Red
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" data-chart="tabla">
+                  <i class="bi bi-table"></i> Tabla
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Panel principal de contenido -->
+        <div class="card shadow-sm">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0" id="dashboardTitle">Panel de Visualización</h5>
+          </div>
+          
+          <div class="card-body">
+            <!-- Controles específicos del mapa (solo visibles si mapamundi) -->
+            <div id="mapControls" class="map-controls" style="display: none;">
+              <div class="row">
+                <div class="col-md-6">
+                 <label for="mapMetricSelect" class="form-label mb-1">Mostrar en el mapa</label>
+                 <select class="form-select form-select-sm" id="mapMetricSelect">
+                   <option value="count" selected>Número de documentos</option>
+                   <option value="importe">Importe total</option>
+                   <option value="relaciones">Número de relaciones</option>
+                 </select>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>&nbsp;</label>
+                    <div class="btn-group-vertical d-block">
+                      <button id="toggleConnectionsBtn" class="btn btn-outline-info btn-sm mb-2">
+                        <i class="bi bi-share"></i> Mostrar Conexiones
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Área principal de contenido -->
+            <div id="mainContentArea">
+              <!-- Aquí se mostrarán gráficos, tabla, mapa y grado -->
+              <div id="mainChart" style="height: 600px;">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <div class="text-center text-muted">
+                    <i class="bi bi-graph-up fs-1"></i>
+                    <p class="mt-2">Seleccione una visualización para comenzar</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Contenedor de tabla (oculto) -->
+              <div id="tableContainer" style="display: none;">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h6 class="mb-0" id="tableTitle">Datos Detallados</h6>
+                  <input type="text" class="form-control form-control-sm w-auto" id="tableSearch" placeholder="Buscar..." style="width: 250px !important;">
+                </div>
+                
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <thead class="table-dark" id="tableHeader">
+                      <!-- Encabezados aquí -->
+                    </thead>
+                    <tbody id="tableBody">
+                      <!-- Datos aquí -->
+                    </tbody>
+                  </table>
+                </div>
+                
+                <nav>
+                  <ul class="pagination justify-content-center" id="pagination">
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-footer d-flex justify-content-end">
+            <button class="btn btn-sm btn-outline-secondary" id="exportSQL">
+              <i class="bi bi-database"></i> Exportar como SQL
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="/javascripts/utils/entityconfig.js"></script>
+  <script src="/javascripts/utils/ui.js"></script>
+  <script src="/javascripts/analisis/mapamundi.js"></script>
+  <script src="/javascripts/analisis/filtros.js"></script>
+  <script src="/javascripts/analisis/exportacion.js"></script>
+  <script src="/javascripts/analisis/charts.js"></script>
+  <script src="/javascripts/analisis/grafoD3.js"></script>
+  <script src="/javascripts/analisis/tabla.js"></script>
+  <script src="/javascripts/analisis/analisis.js"></script>
+</body>
+</html>

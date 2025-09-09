@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Formulario de Protesto</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/stylesheets/formulario.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="/javascripts/utils/buscadorEntidades.js"></script>
+  <script src="/javascripts/utils/searchConfigs.js"></script>
+  <script src="/javascripts/utils/gestorBusquedas.js"></script>
+
+  <script src="/javascripts/formulario/variables.js" defer></script>
+  <script src="/javascripts/formulario/utilidades.js" defer></script>
+  <script src="/javascripts/formulario/validacionFechas.js" defer></script>
+  <script src="/javascripts/formulario/anyadirCampos.js" defer></script>
+  <script src="/javascripts/formulario/letras.js" defer></script>
+  <script src="/javascripts/formulario/rolesAdicionales.js" defer></script>
+  <script src="/javascripts/formulario/validaryEnviar.js" defer></script>
+  <script src="/javascripts/formulario/tabulacion.js" defer></script>
+  <script src="/javascripts/formulario/inicializacion.js" defer></script>
+  <script src="/javascripts/formulario/autorellenar.js" defer></script>
+
+  <!-- <script src="/javascripts/formulario/personas.js" defer></script> -->
+  <!-- <script src="/javascripts/formulario/ciudades.js" defer></script> -->
+  <!-- <script src="/javascripts/formulario/monedas.js" defer></script> -->
+  <!-- <script src="/javascripts/formulario/tipos.js" defer></script> -->
+
+</head>
+<body>
+
+  <%- include('../partials/header') %>
+  
+  <div class="container mt-4">
+    <form id="protestoForm" class="needs-validation" novalidate>
+      <div class="card mb-4">
+        <div class="card-header">
+          <h5 class="mb-0">Formulario protesto</h5>
+        </div>
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">Archivo</label>
+              <input type="text" class="form-control" name="archivo" id="archivo">
+            </div>
+            
+            <div class="col-md-3">
+              <label class="form-label">Escribano</label>
+              <div class="persona-search-group">
+                <input type="text" class="form-control persona-search" data-for="escribano" placeholder="Nombre..." autocomplete="off">
+                <input type="hidden" name="escribano_id">
+                <div class="persona-suggestions"></div>
+              </div>
+            </div>          
+
+            <div class="col-md-3">
+              <label class="form-label">Protocolo</label>
+              <input type="text" class="form-control" name="protocolo" id="protocolo">
+            </div>
+  
+            <div class="col-md-3">
+              <label class="form-label">Página</label>
+              <input type="text" class="form-control" name="pagina" id="pagina">
+            </div>
+  
+            <div class="col-md-3">
+              <label class="form-label">Ciudad Protesto</label>
+              <div class="ciudad-search-group">
+                <input type="text" class="form-control ciudad-search" data-for="protesto_ciudad" placeholder="Ciudad..." autocomplete="off">
+                <input type="hidden" name="ciudad_protesto_id">
+                <div class="ciudad-suggestions"></div>
+              </div>
+            </div>
+  
+            <div class="col-md-3">
+              <label class="form-label">Fecha Protesto</label>
+              <input type="date" class="form-control" name="fecha_protesto" id="fecha_protesto">
+            </div>
+  
+            <!--Protestante -->
+            <div class="col-md-3">
+              <label class="form-label">Protestante Persona</label>
+              <div class="persona-search-group">
+                <input type="text" class="form-control persona-search" data-for="protestante" placeholder="Nombre..." autocomplete="off">
+                <input type="hidden" name="protestante_persona_id">
+                <div class="persona-suggestions"></div>
+              </div>
+            </div>
+
+            <!-- <div class="col-md-3">
+              <label class="form-label">Protestante Ciudad</label>
+              <div class="ciudad-search-group">
+                <input type="text" class="form-control ciudad-search" data-for="protestante_ciudad" placeholder="Ciudad..." autocomplete="off">
+                <input type="hidden" name="protestante_ciudad_id">
+                <div class="ciudad-suggestions"></div>
+              </div>
+            </div> -->
+
+            <div class="col-md-3">
+              <label class="form-label">Representación</label>
+              <div class="persona-search-group">
+                <input type="text" class="form-control persona-search" data-for="representante" placeholder="Nombre..." autocomplete="off">
+                <input type="hidden" name="representante_persona_id">
+                <div class="persona-suggestions"></div>
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label class="form-label">Tipo de Letra</label>
+              <div class="tipo-letra-search-group">
+                <input type="text" class="form-control tipo-letra-search" data-for="tipo_letra_protesto" placeholder="Tipo de letra..." autocomplete="off">
+                <input type="hidden" name="tipo_letra_protesto_id">
+                <div class="tipo-letra-suggestions"></div>
+              </div>
+            </div>            
+
+            <!-- 
+            <div class="col-md-3">
+              <label class="form-label">Tipo de Protesto</label>
+              <div class="tipo-protesto-search-group">
+                <input type="text" class="form-control tipo-protesto-search" data-for="tipo_protesto" placeholder="Tipo de protesto..." autocomplete="off">
+                <input type="hidden" name="tipo_protesto_id">
+                <div class="tipo-protesto-suggestions"></div>
+              </div>
+            </div>
+            -->
+
+            <div id="protestoRolesContainer" class="row g-2 mt-2 roles-container">
+            </div>
+            
+            <!-- Boton añadir más campos -->
+            <div class="mt-2">
+              <a href="#" class="text-primary " data-bs-toggle="modal" data-bs-target="#addCamposModal" data-section="protesto">
+                <i class="bi bi-plus-circle"></i> Añadir más campos
+              </a>
+            </div>
+
+          </div>
+
+          <!-- Letra de Cambio (iba aquí)-->
+                <!-- Endoso (iba aquí)-->
+
+          <!-- Contenedor de Letras -->
+          <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between mb-3">
+              <h5 class="mb-0">Letras de Cambio</h5>
+              <button type="button" class="btn btn-secondary" onclick="addLetra()">
+                <i class="bi bi-plus"></i> Añadir Letra
+              </button>
+            </div>
+            <div class="card-body">
+              <div id="letrasContainer">
+                <!-- letras dinámicamente -->
+              </div>
+              <button type="button" class="btn btn-secondary" onclick="addLetra()">
+                <i class="bi bi-plus"></i> Añadir Letra
+              </button>
+            </div>
+          </div>
+
+          <!-- Segunda parte datos protesto -->
+          <div class="card mb-3">
+            <div class="card-header">
+              <h5 class="mb-0">Continuación datos protesto Protesto</h5>
+            </div>
+            <!-- Motivo Impago -->
+            <div class="card-body">
+              <div class="mb-3">
+                <label class="form-label">Motivo del impago</label>
+                <textarea class="form-control" rows="3" name="motivo_impago" id="motivo_impago"></textarea>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Presentado a</label>
+                <div class="persona-search-group">
+                  <input type="text" class="form-control persona-search" data-for="presentado" placeholder="Nombre..." autocomplete="off">
+                  <input type="hidden" name="presentado_persona_id">
+                  <div class="persona-suggestions"></div>
+                </div>
+                <div class="input-group">
+                  <div class="ciudad-search-group w-100">
+                    <input type="text" class="form-control ciudad-search" data-for="presentado_ciudad" placeholder="Ciudad..." autocomplete="off">
+                    <input type="hidden" name="presentado_ciudad_id">
+                    <div class="ciudad-suggestions"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Abono y Cesión -->
+            <div class="card-body">
+              <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" onchange="toggleSection(this, 'abonoCesion')">
+                <label class="form-check-label">Incluir Abono y Cesión</label>
+              </div>
+              <div id="abonoCesion" class="d-none">
+                <div class="mb-3">
+                  <label class="form-label">Detalles del Abono</label>
+                  <textarea class="form-control" rows="3" name="detalles_abono" id="detalles_abono"></textarea>
+                </div>
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <label class="form-label">Abona</label>
+                    <div class="persona-search-group">
+                      <input type="text" class="form-control persona-search" data-for="abona" placeholder="Nombre..." autocomplete="off">
+                      <input type="hidden" name="abona_persona_id">
+                      <div class="persona-suggestions"></div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="ciudad-search-group">
+                        <input type="text"  class="form-control ciudad-search"  data-for="abona_ciudad" placeholder="Ciudad..." autocomplete="off">
+                        <input type="hidden" name="abona_ciudad_id">
+                        <div class="ciudad-suggestions"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <label class="form-label">Cedido a</label>
+                    <div class="persona-search-group">
+                      <input type="text" 
+                             class="form-control persona-search" 
+                             data-for="cedido"
+                             placeholder="Nombre..."
+                             autocomplete="off">
+                      <input type="hidden" name="cedido_persona_id">
+                      <div class="persona-suggestions"></div>
+                    </div>
+                    <div class="mt-2">
+                      <div class="ciudad-search-group">
+                        <input type="text" class="form-control ciudad-search" data-for="cedido_ciudad" placeholder="Ciudad..." autocomplete="off">
+                        <input type="hidden" name="cedido_ciudad_id">
+                        <div class="ciudad-suggestions"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Tipo de protesto -->
+            <div class="card-body">
+              <div class="row g-2">
+                <div class="col-md-6">
+                  <label class="form-label">Tipo de Protesto</label>
+                  <div class="tipo-protesto-search-group">
+                    <input type="text" class="form-control tipo-protesto-search" data-for="tipo_protesto" placeholder="Tipo de protesto..." autocomplete="off">
+                    <input type="hidden" name="tipo_protesto_id">
+                    <div class="tipo-protesto-suggestions"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+
+          <!-- Botón de guardar -->
+          <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-lg">
+              <i class="bi bi-save"></i>
+              Guardar Protesto
+            </button>
+          </div>
+
+        </div>
+      </div>   
+    </form>
+  </div>
+
+  <!-- Modal Seleccionar Persona -->
+  <!-- < %- include('../partials/modales/modalSelectPersonas') %> -->
+  <!-- Modal Añadrir Persona -->
+
+  <!-- Modal Seleccionar Ciudades -->
+  <!-- < %- include('../partials/modales/modalSelectCiudades') %> -->
+  <!-- Modal Añadir Ciudad -->
+  <!-- < %- include('../partials/modales/modalAddCiudad') %> -->
+  <!-- Modal Monedas -->
+  <!-- < %- include('../partials/modales/modalSelectMonedas') %> -->
+  <!-- Modal Añadir Moneda -->
+  <!-- < %- include('../partials/modales/modalAddMoneda') %> -->
+  <!-- Modal roles -->
+  <!-- < %- include('../partials/modales/modalSelectRoles') %> -->
+  <!-- Modal Añadir Rol -->
+  <!-- < %- include('../partials/modales/modalAddRol') %> -->
+
+  <%- include('./validar') %>
+  <%- include('./anyadirMasCampos') %>
+  <%- include('./anyadirMasRoles')%>
+
+<div class="spinner-border text-primary d-none" role="status" id="loadingSpinner">
+  <span class="visually-hidden">Cargando...</span>
+</div>
+
+</body>
+</html>

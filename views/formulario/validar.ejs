@@ -1,0 +1,26 @@
+<!-- Modal para validar -->
+<div class="modal fade" id="validationErrorsModal" tabindex="-1" aria-labelledby="validationErrorsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title" id="validationErrorsModalLabel">
+          <i class="bi bi-exclamation-triangle-fill me-2"></i>
+          Errores de Validación
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p class="mb-3">Se han encontrado los siguientes errores que deben corregirse antes de enviar el formulario:</p>
+        <ul id="validationErrorsList" class="list-group">
+          <!-- Los errores se añaden aquí -->
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          <i class="bi bi-x-circle me-1"></i>
+          Cerrar y corregir
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal fade" id="selectPersonaModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Seleccionar Persona</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <input type="text" 
+                  id="searchPersona" 
+                  class="form-control" 
+                  placeholder="Buscar persona...">
+          </div>
+          <div id="personasList" class="list-group">
+            <!-- Lista de personas -->
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" onclick="openAddPersonaModal()">
+            <i class="bi bi-plus"></i> Nueva Persona
+          </button>
+        </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<div class="modal fade" id="addRolModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Añadir Rol</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="addRolForm">
+            <div class="mb-3">
+              <label for="nombreRol" class="form-label">Nombre del Rol</label>
+              <input type="text" class="form-control" id="nombreRol" name="nombre_rol" required>
+            </div>
+            <div class="mb-3">
+              <label for="tipoRol" class="form-label">Tipo de Rol</label>
+              <select class="form-control" id="tipoRol" name="tipo_rol" required>
+                <option value="protesto">Protesto</option>
+                <option value="letracambio">Letra de Cambio</option>
+                <option value="endoso">Endoso</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>

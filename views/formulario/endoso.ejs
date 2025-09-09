@@ -1,0 +1,87 @@
+<!-- NO SE USA pero le eche demasiado tiempo como para quitaro-->
+<div id="endoso_<%= letraIndex %>_<%= endosoIndex %>" class="endoso-section mb-2" data-letra-index="<%= letraIndex %>" data-endoso-index="<%= endosoIndex %>">
+  <div class="d-flex justify-content-between mb-2">
+    <h6>Endoso #<%= endosoIndex + 1 %></h6>
+    <button type="button" class="btn btn-outline-danger btn-sm" onclick="removeEndoso(<%= letraIndex %>, <%= endosoIndex %>)">
+      <i class="bi bi-trash"></i>
+    </button>
+  </div>
+
+  <div class="row g-2">
+    <!-- Endosado -->
+    <div class="col-md-4">
+      <label class="form-label">Endosado</label>
+      <div class="persona-search-group">
+          <input type="text" class="form-control persona-search" data-for="endosado_<%= letraIndex %>_<%= endosoIndex %>" placeholder="Nombre..." autocomplete="off">
+          <input type="hidden" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][endosado_persona_id]">
+          <div class="persona-suggestions"></div>
+      </div>
+      <div class="input-group mt-1">
+        <div class="ciudad-search-group w-100">
+          <input type="text" class="form-control ciudad-search" data-for="endosado_ciudad_<%= letraIndex %>_<%= endosoIndex %>" placeholder="Ciudad..." autocomplete="off">
+          <input type="hidden" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][endosado_ciudad_id]">
+          <div class="ciudad-suggestions"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Moneda  -->
+    <div class="col-md-4">
+      <label class="form-label">Cambio o Moneda</label>
+      <div class="moneda-search-group flex-grow-1">
+        <input type="text" class="form-control moneda-search" data-for="endoso_<%= letraIndex %>_<%= endosoIndex %>" placeholder="Moneda..." autocomplete="off">
+        <input type="hidden" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][moneda_id]">
+        <div class="moneda-suggestions"></div>
+      </div>
+    </div>
+
+    <!-- Importe -->
+    <div class="col-md-4">
+      <label class="form-label">Importe</label>
+      <div class="input-group">
+          <input type="number" class="form-control" step="0.01" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][importe]">
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <label class="form-label">Ciudad del Endoso</label>
+      <div class="ciudad-search-group">
+        <input type="text" class="form-control ciudad-search" data-for="endoso_ciudad_<%= letraIndex %>_<%= endosoIndex %>" placeholder="Ciudad..." autocomplete="off">
+        <input type="hidden" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][ciudad_id]">
+        <div class="ciudad-suggestions"></div>
+      </div>
+    </div>
+
+    <!-- Fecha y Lugar -->
+    <div class="col-md-4">
+      <label class="form-label">Fecha</label>
+      <input type="date" class="form-control" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][fecha]">
+    </div>
+
+    <!-- Endosante -->
+    <div class="col-md-4">
+      <label class="form-label">Endosante</label>
+      <div class="persona-search-group">
+        <input type="text"  class="form-control persona-search" data-for="endosante_<%= letraIndex %>_<%= endosoIndex %>" placeholder="Nombre..." autocomplete="off">
+        <input type="hidden" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][endosante_persona_id]">
+        <div class="persona-suggestions"></div>
+      </div>
+      <div class="input-group mt-1">
+        <div class="ciudad-search-group w-100">
+          <input type="text" class="form-control ciudad-search" data-for="endosante_ciudad_<%= letraIndex %>_<%= endosoIndex %>" placeholder="Ciudad..." autocomplete="off">
+          <input type="hidden" name="letras[<%= letraIndex %>][endosos][<%= endosoIndex %>][endosante_ciudad_id]">
+          <div class="ciudad-suggestions"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Añadir más campos -->
+    <div class="mt-2">
+      <a href="#" class="text-primary add-campos-link" data-bs-toggle="modal" data-bs-target="#addCamposModal" data-section="endoso" data-letra-index="<%= letraIndex %>" data-endoso-index="<%= endosoIndex %>">
+        <i class="bi bi-plus-circle"></i> Añadir más campos
+      </a>
+    </div>
+
+  </div>
+  
+</div>

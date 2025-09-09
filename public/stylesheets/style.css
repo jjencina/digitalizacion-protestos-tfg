@@ -1,0 +1,115 @@
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.entity-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 10px;
+  width: 250px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.entity-title {
+  font-size: 1.4rem;
+  margin-bottom: 15px;
+  font-weight: bold;
+  color: #343a40;
+}
+
+.entity-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.entity-buttons a {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.entity-buttons .btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9rem;
+  text-align: center;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #1e7e34;
+}
+
+.btn-warning {
+  background-color: #ffc107;
+  border: none;
+  color: #212529;
+}
+
+.btn-warning:hover {
+  background-color: #e0a800;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #bd2130;
+}
+
+.btn-info {
+  background-color: #17a2b8;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #117a8b;
+}
+
+.protesto-section {
+  background-color: #e3f2fd;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.letra-section {
+  background-color: #fff3e0;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+.endoso-section {
+  background-color: #e8f5e9;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}

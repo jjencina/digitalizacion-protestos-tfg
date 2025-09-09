@@ -1,0 +1,112 @@
+<!-- Deberia haberse llamado Gestion mejor -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Protestos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="/stylesheets/consultar.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="/javascripts/utils/comun.js" defer></script>
+    <script src="/javascripts/utils/ui.js" defer></script>
+    <script src="/javascripts/utils/filtrado.js" defer></script>
+    <script src="/javascripts/utils/entityconfig.js" defer></script>
+    <script src="/javascripts/consultar/consultar.js" defer></script>
+    
+</head>
+<body class="bg-light">
+
+    <%- include('../partials/header') %>
+
+    <div class="table-container">
+        <div class="entity-panel mb-3">
+            <div class="entity-selector">
+                <div class="btn-group" role="group">
+                    <button class="btn btn-outline-primary active" data-entity="protestos">
+                        <i class="bi bi-file-earmark-text"></i> Protestos
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="letras">
+                        <i class="bi bi-file-text"></i> Letras
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="endosos">
+                        <i class="bi bi-arrow-left-right"></i> Endosos
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="personas">
+                        <i class="bi bi-people"></i> Personas
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="ciudades">
+                        <i class="bi bi-geo-alt"></i> Ciudades
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="monedas">
+                        <i class="bi bi-currency-euro"></i> Monedas
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="tiposProtesto">
+                        <i class="bi bi-list-check"></i> Tipos de Protesto
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="tiposLetra">
+                        <i class="bi bi-file-earmark-ruled"></i> Tipos de Letra
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="roles">
+                        <i class="bi bi-person-badge"></i> Roles
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="relacionProtestosLetras">
+                        <i class="bi bi-diagram-2"></i> Rel. Protestos-Letras
+                    </button>
+                    <button class="btn btn-outline-primary" data-entity="relacionLetrasEndosos">
+                        <i class="bi bi-diagram-3"></i> Rel. Letras-Endosos
+                    </button>
+                </div>
+            </div>
+            <div class="entity-actions mt-2">
+                <button class="btn btn-success btn-sm" id="btnAddEntity">
+                    <i class="bi bi-plus-circle"></i> Añadir
+                </button>
+                <!-- <button class="btn btn-primary btn-sm ms-2" id="btnFiltrosAvanzados">
+                    <i class="bi bi-funnel"></i> Filtros Avanzados
+                </button> -->
+                <input type="text" id="entitySearchInput" class="search-input" placeholder="Buscar...">
+            </div>
+        </div>
+
+        <!-- Contenedor de tablas dinámicas -->
+        <div id="entityTableContainer">
+            <!-- Aquí se cargará dinámicamente la tabla según la entidad seleccionada -->
+        </div>
+
+        <!-- Tabla de protestos -->
+        <div id="protestosTableContainer">
+            <table class="table table-bordered compact-table" id="protestosTable">
+                <thead>
+                    <tr>
+                        <th style="width: 60px"></th>
+                        <th style="width: 80px">#</th>
+                        <th style="width: 100px">Fecha</th>
+                        <th style="width: 150px">Archivo</th>
+                        <th style="width: 120px">Protocolo</th>
+                        <th style="width: 100px">Página</th>
+                        <th style="width: 150px">Ciudad</th>
+                        <th style="width: 120px">Tipo Letra</th>
+                        <th style="width: 120px">Tipo Protesto</th>
+                        <th style="width: 200px">Motivo</th>
+                        <th style="width: 300px">Roles</th>
+                        <th style="width: 100px">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="protestosTableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    
+
+
+</body>
+</html>
